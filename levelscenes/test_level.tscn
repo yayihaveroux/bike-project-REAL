@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=3 uid="uid://cib7rtg81tbgg"]
+
+[ext_resource type="Texture2D" uid="uid://c812wakjm26ce" path="res://placeholderassets/Dark/texture_08.png" id="2_48245"]
+[ext_resource type="PackedScene" uid="uid://d4gxqh2nbgr85" path="res://playerscenes/player.tscn" id="2_uecs2"]
+[ext_resource type="Texture2D" uid="uid://bbkq3rv3e1pa1" path="res://placeholderassets/Light/texture_07.png" id="3_h8jmw"]
+[ext_resource type="Texture2D" uid="uid://dilbjc35k8wde" path="res://placeholderassets/Red/texture_02.png" id="4_ajbpa"]
+[ext_resource type="PackedScene" uid="uid://cds65r23ft4br" path="res://playerscenes/motorbike.tscn" id="4_h107i"]
+
+[sub_resource type="Environment" id="Environment_1ubxp"]
+background_mode = 1
+background_color = Color(0, 0.756949, 0.636954, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1.92523e-06, 0.702437, 0.658774, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fh7p7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2sxu"]
+albedo_texture = ExtResource("2_48245")
+uv1_scale = Vector3(500, 500, 500)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reaa1"]
+albedo_texture = ExtResource("3_h8jmw")
+uv1_scale = Vector3(2.4, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y3ml"]
+albedo_texture = ExtResource("4_ajbpa")
+
+[node name="test level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.580319, -0.596275, -0.554694, 0, -0.681117, 0.732175, -0.814389, -0.424895, -0.395265, 0, 0, 0)
+light_color = Color(0.999973, 0.230259, 0.167829, 1)
+shadow_enabled = true
+shadow_normal_bias = 2.5
+shadow_blur = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1ubxp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.684076, 0.729411, 0, -0.729411, 0.684076, 0, 29.5919, 7.39173)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="World"]
+transform = Transform3D(1000, 0, 0, 0, 0.1, 0, 0, 0, 1000, -0.36, 0, -0.516)
+use_collision = true
+mesh = SubResource("BoxMesh_fh7p7")
+material = SubResource("StandardMaterial3D_k2sxu")
+
+[node name="Wall" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.943, -499.894)
+use_collision = true
+size = Vector3(1000, 14.2716, 1.034)
+material = SubResource("StandardMaterial3D_reaa1")
+
+[node name="Wall2" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.943, 499.894)
+use_collision = true
+size = Vector3(1000, 14.2716, 1.034)
+material = SubResource("StandardMaterial3D_reaa1")
+
+[node name="Wall3" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 499, 6.943, 0)
+use_collision = true
+size = Vector3(1000, 14.2716, 1.034)
+material = SubResource("StandardMaterial3D_reaa1")
+
+[node name="Wall4" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -499, 6.943, 0)
+use_collision = true
+size = Vector3(1000, 14.2716, 1.034)
+material = SubResource("StandardMaterial3D_reaa1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91563, 2.17505, -1.35255)
+use_collision = true
+size = Vector3(1.13562, 5.3501, 73.4933)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.3921, 2.17505, -44.5455)
+use_collision = true
+size = Vector3(1.13562, 5.3501, 36.312)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.5167, 2.17505, -37.5386)
+use_collision = true
+size = Vector3(1.13562, 5.3501, 28.0627)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.278, 15.3184, -201.811)
+use_collision = true
+size = Vector3(0.754333, 31.6368, 13.9903)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World"]
+transform = Transform3D(-3.53251e-08, -0.588985, 0.808144, -2.57453e-08, 0.808144, 0.588985, -1, 0, -4.37114e-08, 28.7192, 1.90015, -41.0587)
+use_collision = true
+size = Vector3(5.95963, 0.24707, 9.61425)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World"]
+transform = Transform3D(-3.23734e-08, -0.671928, 0.740617, -2.93708e-08, 0.740617, 0.671928, -1, 0, -4.37114e-08, 35.8494, 7.09674, -95.2114)
+use_collision = true
+size = Vector3(14.7326, 0.24707, 27.2602)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.16e-08, -0.307041, 0.951696, -1.34211e-08, 0.951696, 0.307041, -1, 0, -4.37114e-08, 35.09, 3.42596, -115.61)
+use_collision = true
+size = Vector3(14.7326, 0.24707, 24.2015)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4757, 11.4006, 1.10515)
+use_collision = true
+size = Vector3(29.501, 23.8011, 38.4459)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3553, 6.18124, -37.0021)
+use_collision = true
+size = Vector3(39.2603, 13.3625, 16.3098)
+material = SubResource("StandardMaterial3D_1y3ml")
+
+[node name="Motorbike" parent="." instance=ExtResource("4_h107i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.350204, 4, -7.90012)
+
+[node name="Player" parent="." instance=ExtResource("2_uecs2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.29692, 2.54606)

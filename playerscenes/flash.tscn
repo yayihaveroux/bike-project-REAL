@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dul2p65mdnysn"]
+
+[ext_resource type="Texture2D" uid="uid://de7fn6cyjee4d" path="res://placeholderassets/gunflash.png" id="1_o1isa"]
+[ext_resource type="Script" path="res://flash.gd" id="2_xe8bx"]
+
+[node name="Flash" type="Sprite3D"]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, -0.0539879, -0.584817, -0.17987)
+texture = ExtResource("1_o1isa")
+script = ExtResource("2_xe8bx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
