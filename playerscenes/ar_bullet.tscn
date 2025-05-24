@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkwxaw4dvgyrn"]
+
+[ext_resource type="Texture2D" uid="uid://bhbjd6ibo6hud" path="res://placeholderassets/bullet.png" id="1_lwp3p"]
+[ext_resource type="Script" path="res://playerscenes/ar_bullet.gd" id="1_xmcr8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8ogc"]
+shading_mode = 0
+albedo_texture = ExtResource("1_lwp3p")
+distance_fade_max_distance = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_v3dxk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tapai"]
+size = Vector3(0.435841, 0.445897, 4.84222)
+
+[node name="ARBullet" type="Node3D"]
+script = ExtResource("1_xmcr8")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0841571)
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(0.349866, 0, 0, 0, 0.344222, 0, 0, 0, 4.17542, 0, 0, -2.06975)
+material_override = SubResource("StandardMaterial3D_v8ogc")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_v3dxk")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00123566, 8.89301e-05, -2.32162)
+shape = SubResource("BoxShape3D_tapai")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

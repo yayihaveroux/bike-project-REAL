@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://2hs2gsc2dnd5"]
+
+[ext_resource type="Script" path="res://VehicleNodeBike.gd" id="1_kqjlj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_te8w2"]
+size = Vector3(0.501465, 1, 3.15991)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g5qcy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ktxr0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q7qy4"]
+
+[node name="Node3D" type="VehicleBody3D"]
+script = ExtResource("1_kqjlj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.164476, -0.195045)
+shape = SubResource("BoxShape3D_te8w2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.518694, 0, 0, 0, 1, 0, 0, 0, 3.17285, 0, 0.0457177, -0.110384)
+mesh = SubResource("BoxMesh_g5qcy")
+skeleton = NodePath("../..")
+
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.479156, 1.34682)
+use_as_traction = true
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D"]
+transform = Transform3D(-4.37114e-08, -0.15, 0, 1, -6.55671e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ktxr0")
+
+[node name="VehicleWheel3D2" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.479156, -1.99593)
+use_as_steering = true
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D2"]
+transform = Transform3D(-4.37114e-08, -0.15, 0, 1, -6.55671e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_q7qy4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92641, 0.376515, 0, -0.376515, 0.92641, 0, 2.46237, 4.89996)
+current = true

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cds65r23ft4br"]
+
+[ext_resource type="Script" path="res://motorbike.gd" id="1_krw14"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6664g"]
+radius = 0.488399
+height = 1.08787
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnf64"]
+
+[node name="Motorbike" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.925174)
+floor_max_angle = 1.22173
+floor_snap_length = 0.5
+script = ExtResource("1_krw14")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375438, 0.00646973)
+shape = SubResource("CapsuleShape3D_6664g")
+
+[node name="BikeTurn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Bike" type="MeshInstance3D" parent="BikeTurn"]
+transform = Transform3D(0.3937, 0, 0, 0, 0.918017, 0, 0, 0, 2.76278, 0, 0.576212, 0)
+mesh = SubResource("BoxMesh_gnf64")
+skeleton = NodePath("../..")
