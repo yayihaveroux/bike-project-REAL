@@ -92,9 +92,9 @@ func _physics_process(delta: float) -> void:
 	
 	var speedometer = sqrt(Global.speedometer)
 	$CanvasLayer/UI/speed.text = "Speed: " + str(int(speedometer))
-	$CanvasLayer/UI/position.text = "Position: " + str(global_position)
+	$CanvasLayer/UI/TopLeft/position.text = "Position: " + str(global_position)
 	move_and_slide()
-	$CanvasLayer/UI/fps.text = "FPS: " + str(Engine.get_frames_per_second())
+	$CanvasLayer/UI/TopLeft/fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	#print("this is you: ", transform.basis)
 	
 	

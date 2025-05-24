@@ -23,7 +23,9 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if !is_on_floor() and !is_on_wall() and !is_on_ceiling():
 		velocity += get_gravity() * 5 * delta
-		
+	if !is_on_floor() and is_on_wall():
+		velocity += (get_gravity().y * get_wall_normal()) * 5 * delta
+		print("shimmy shimmy ay")
 	# Handle jump.
 	elif Input.is_action_just_pressed("ui_accept") and Global.is_on_bike:
 		velocity.y = 20
@@ -69,7 +71,7 @@ func _physics_process(delta: float) -> void:
 				rotating = 0
 
 				
-	global_transform = global_transform.interpolate_with(slope_align(global_transform), 5 * delta)
+	global_transform = global_transform.interpolate_with(slope_align(global_transform), 8 * delta)
 	
 	rotation_degrees.y += rotating * delta
 	rotation_degrees.z = (35 * (rotating / 100)) 
@@ -86,13 +88,13 @@ func _physics_process(delta: float) -> void:
 	
 	
 
-	var collision = get_last_slide_collision()
-	var result = collide_and_bounce(collision)
+	#var collision = get_last_slide_collision()
+	#var result = collide_and_bounce(collision)
 	
-	if result != null:
-		rotation_amount = result
-	rotation.y = lerp_angle(rotation.y, (rotation.y + rotation_amount.y), 0.4)
-	rotation_amount.y = lerp_angle(rotation_amount.y, 0, 0.4)
+	#if result != null:
+#		rotation_amount = result
+#	rotation.y = lerp_angle(rotation.y, (rotation.y + rotation_amount.y), 0.4)
+#	rotation_amount.y = lerp_angle(rotation_amount.y, 0, 0.4)
 	
 	
 	
@@ -110,18 +112,28 @@ func _physics_process(delta: float) -> void:
 	
 	
 func slope_align(xform):
-	if !is_on_floor():
+	if !is_on_floor() and !is_on_wall():
 		var before = xform
 		xform.basis.y = Vector3.UP
 		xform.basis.x = xform.basis.y.cross(xform.basis.z)
 		xform.basis = xform.basis.orthonormalized()
 		var result = before.interpolate_with(xform, 0.1)
+		print("yuh")
 		return result
+	elif !is_on_floor() and is_on_wall():
+		xform.basis.y = get_wall_normal()
+		xform.basis.z = Vector3.DOWN
+		xform.basis.x = xform.basis.y.cross(xform.basis.z)
+		xform.basis = xform.basis.orthonormalized()
+		print(get_wall_normal())
+		print(xform.basis)
+		return xform
 	else:
 		var normal = get_floor_normal()
 		xform.basis.y = normal
 		xform.basis.x = xform.basis.y.cross(xform.basis.z)
 		xform.basis = xform.basis.orthonormalized()
+		print("nuh")
 		return xform
 	return "woopsies"
 	

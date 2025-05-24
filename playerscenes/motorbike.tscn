@@ -9,8 +9,9 @@ height = 1.08787
 [sub_resource type="BoxMesh" id="BoxMesh_gnf64"]
 
 [node name="Motorbike" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.925174)
-floor_max_angle = 1.22173
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+wall_min_slide_angle = 3.14159
+floor_max_angle = 1.13446
 floor_snap_length = 0.5
 script = ExtResource("1_krw14")
 
