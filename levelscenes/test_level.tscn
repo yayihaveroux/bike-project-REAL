@@ -127,7 +127,7 @@ size = Vector3(39.2603, 13.3625, 16.3098)
 material = SubResource("StandardMaterial3D_1y3ml")
 
 [node name="Motorbike" parent="." instance=ExtResource("4_h107i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.350204, 4, -7.90012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.350204, 9.57151, 52.0758)
 
 [node name="Player" parent="." instance=ExtResource("2_uecs2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.29692, 2.54606)
+transform = Transform3D(-0.00722548, 0, 0.999974, 0, 1, 0, -0.999974, 0, -0.00722548, 15.3934, 4.29692, 49.9575)

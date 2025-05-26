@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cds65r23ft4br"]
+[gd_scene load_steps=6 format=3 uid="uid://cds65r23ft4br"]
 
 [ext_resource type="Script" path="res://motorbike.gd" id="1_krw14"]
+[ext_resource type="PackedScene" uid="uid://yoj67ft0dgvu" path="res://placeholderassets/ProtoBichael.glb" id="2_bgg5k"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6664g"]
-radius = 0.488399
-height = 1.08787
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_hwgim"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_gnf64"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_le1hf"]
+height = 0.365139
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rvj1e"]
 
 [node name="Motorbike" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -16,13 +18,41 @@ floor_snap_length = 0.5
 script = ExtResource("1_krw14")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375438, 0.00646973)
-shape = SubResource("CapsuleShape3D_6664g")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.313754, 0.00646973)
+shape = SubResource("SeparationRayShape3D_hwgim")
+
+[node name="FrontCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.592841, -1.09528)
+shape = SubResource("CylinderShape3D_le1hf")
+
+[node name="BackCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.592841, 1.64812)
+shape = SubResource("CylinderShape3D_le1hf")
 
 [node name="BikeTurn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.63952)
 
-[node name="Bike" type="MeshInstance3D" parent="BikeTurn"]
-transform = Transform3D(0.3937, 0, 0, 0, 0.918017, 0, 0, 0, 2.76278, 0, 0.576212, 0)
-mesh = SubResource("BoxMesh_gnf64")
-skeleton = NodePath("../..")
+[node name="FrontWheel" type="MeshInstance3D" parent="BikeTurn"]
+transform = Transform3D(-4.37114e-08, -0.062374, 0, 1, -2.72646e-09, 0, 0, 0, 1, 0, 0.4057, -2.73367)
+mesh = SubResource("CylinderMesh_rvj1e")
+
+[node name="FrontCast" type="RayCast3D" parent="BikeTurn/FrontWheel"]
+transform = Transform3D(1, 4.44089e-16, 0, 0, 1, 0, 0, 0, 1, -0.5009, 1.71497e-07, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="Backwheel" type="MeshInstance3D" parent="BikeTurn"]
+transform = Transform3D(-4.37114e-08, -0.062, 0, 1, -2.71011e-09, 0, 0, 0, 1, 0, 0.4057, 0.00848901)
+mesh = SubResource("CylinderMesh_rvj1e")
+
+[node name="BackCast" type="RayCast3D" parent="BikeTurn/Backwheel"]
+transform = Transform3D(1, 4.44089e-16, 0, 0, 1, 0, 0, 0, 1, -0.500466, 1.71348e-07, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="ProtoBichael" parent="BikeTurn" instance=ExtResource("2_bgg5k")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0.0368697, -1.44091)
+
+[node name="PlayerPos" type="Marker3D" parent="BikeTurn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23915, -1.24933)
+
+[node name="directions" type="Node3D" parent="."]
+visible = false
