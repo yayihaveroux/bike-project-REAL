@@ -1,58 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://cds65r23ft4br"]
+[gd_scene load_steps=8 format=3 uid="uid://cds65r23ft4br"]
 
 [ext_resource type="Script" path="res://motorbike.gd" id="1_krw14"]
-[ext_resource type="PackedScene" uid="uid://yoj67ft0dgvu" path="res://placeholderassets/ProtoBichael.glb" id="2_bgg5k"]
+[ext_resource type="PackedScene" uid="uid://cq1oflea6brut" path="res://playerscenes/bichael models/ProtoBichaelBody.tscn" id="2_olr3o"]
+[ext_resource type="PackedScene" uid="uid://c40tbehaaxs25" path="res://placeholderassets/ProtoBichaelWheel.glb" id="3_cvshe"]
+[ext_resource type="PackedScene" uid="uid://d0brw4m07fkl4" path="res://playerscenes/bichael models/proto_bichael_handlebars.tscn" id="4_qch50"]
 
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_hwgim"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1psxf"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_le1hf"]
-height = 0.365139
+[sub_resource type="SphereMesh" id="SphereMesh_y408p"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_rvj1e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ayvma"]
+albedo_color = Color(1, 0.979068, 0.85147, 1)
+emission_enabled = true
+emission = Color(0.982651, 0.92796, 0.832854, 1)
+emission_energy_multiplier = 5.13
 
 [node name="Motorbike" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-wall_min_slide_angle = 3.14159
-floor_max_angle = 1.13446
+floor_max_angle = 1.309
 floor_snap_length = 0.5
 script = ExtResource("1_krw14")
 
+[node name="Player_dismount" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46318, 0.73267, 0)
+
+[node name="FrontCast" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.106908, 0, 1, -4.67311e-09, 0, 0, 0, 1, 3.56064e-09, -1.0952, -1.55626)
+target_position = Vector3(-1, 0, 0)
+
+[node name="BackCast" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.106267, 0, 1, -4.64508e-09, 0, 0, 0, 1, 3.66743e-09, -1.09477, 1.21077)
+target_position = Vector3(-1, 0, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.313754, 0.00646973)
-shape = SubResource("SeparationRayShape3D_hwgim")
-
-[node name="FrontCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.592841, -1.09528)
-shape = SubResource("CylinderShape3D_le1hf")
-
-[node name="BackCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.592841, 1.64812)
-shape = SubResource("CylinderShape3D_le1hf")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.508734, 0)
+shape = SubResource("SphereShape3D_1psxf")
 
 [node name="BikeTurn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.63952)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.19546)
 
-[node name="FrontWheel" type="MeshInstance3D" parent="BikeTurn"]
-transform = Transform3D(-4.37114e-08, -0.062374, 0, 1, -2.72646e-09, 0, 0, 0, 1, 0, 0.4057, -2.73367)
-mesh = SubResource("CylinderMesh_rvj1e")
-
-[node name="FrontCast" type="RayCast3D" parent="BikeTurn/FrontWheel"]
-transform = Transform3D(1, 4.44089e-16, 0, 0, 1, 0, 0, 0, 1, -0.5009, 1.71497e-07, 0)
-target_position = Vector3(-1, 0, 0)
-
-[node name="Backwheel" type="MeshInstance3D" parent="BikeTurn"]
-transform = Transform3D(-4.37114e-08, -0.062, 0, 1, -2.71011e-09, 0, 0, 0, 1, 0, 0.4057, 0.00848901)
-mesh = SubResource("CylinderMesh_rvj1e")
-
-[node name="BackCast" type="RayCast3D" parent="BikeTurn/Backwheel"]
-transform = Transform3D(1, 4.44089e-16, 0, 0, 1, 0, 0, 0, 1, -0.500466, 1.71348e-07, 0)
-target_position = Vector3(-1, 0, 0)
-
-[node name="ProtoBichael" parent="BikeTurn" instance=ExtResource("2_bgg5k")]
-transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0.0368697, -1.44091)
+[node name="Brakelight" type="SpotLight3D" parent="BikeTurn"]
+transform = Transform3D(-1, 1.89408e-08, -1.42896e-07, -2.82485e-08, 0.946356, 0.323125, 1.41351e-07, 0.323125, -0.946356, 0, 0.882769, 0.251922)
+light_color = Color(0.763718, 0, 0.122551, 1)
+light_energy = 20.0
+light_volumetric_fog_energy = 0.0
+spot_range = 4.15243
+spot_angle = 54.3295
 
 [node name="PlayerPos" type="Marker3D" parent="BikeTurn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23915, -1.24933)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53422, -1.19546)
+
+[node name="ProtoBichaelBody2" parent="BikeTurn" instance=ExtResource("2_olr3o")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, -1.38308)
+
+[node name="BackWheel" parent="BikeTurn" instance=ExtResource("3_cvshe")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, 0.435559, -0.095469)
+
+[node name="BichaelRot" type="Marker3D" parent="BikeTurn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40979, -2.29477)
+
+[node name="ProtoBichaelHandlebars2" parent="BikeTurn/BichaelRot" instance=ExtResource("4_qch50")]
+transform = Transform3D(-0.5, 9.27313e-09, -7.16556e-08, -1.3767e-08, 0.474554, 0.157477, 7.09294e-08, 0.157477, -0.474554, 0, -1.55264, 0.316044)
+
+[node name="FrontWheel" parent="BikeTurn/BichaelRot" instance=ExtResource("3_cvshe")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, -0.974231, -0.385905)
+
+[node name="Headlight" type="SpotLight3D" parent="BikeTurn/BichaelRot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.139279, -0.1192)
+light_energy = 20.0
+shadow_bias = 0.1
+spot_range = 291.969
+spot_angle = 31.706
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BikeTurn/BichaelRot"]
+transform = Transform3D(0.266784, 0, 0, 0, 0.261491, 0, 0, 0, 0.181953, -5.96046e-08, -0.123292, -0.30523)
+mesh = SubResource("SphereMesh_y408p")
+surface_material_override/0 = SubResource("StandardMaterial3D_ayvma")
 
 [node name="directions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.444062)
 visible = false

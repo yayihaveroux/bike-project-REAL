@@ -22,12 +22,15 @@ var mouse_motion = Vector2(0, 0)
 
 var pausecamera = false
 
+var respawn_pos
+var respawn_trans
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	floor_snap_length = 2.5
-	
-	
+	respawn_pos = global_position
+	respawn_trans = global_transform
+	Global.player_position = global_position
 	
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -35,7 +38,13 @@ func _input(event):
 	
 	
 func _physics_process(delta: float) -> void:
-		
+	Global.player_position = global_position
+	if Global.player_health <= 0:
+		death()
+		return
+	var old_cam_x = $CameraRoot.global_rotation.x
+	var old_cam_y = $CameraRoot.global_rotation.y
+	var old_cam_z = $CameraRoot.global_rotation.z
 		
 		
 	if Input.is_action_just_pressed("Pause"):
@@ -70,7 +79,12 @@ func _physics_process(delta: float) -> void:
 			
 	else: 
 		
-		transform = Global.bike_transform
+		#global_transform = Global.bike_transform
+		global_position = Global.bike_position
+		global_rotation = Global.bike_rotation
+		#global_position = Global.bike_position
+		#global_rotation = Global.bike_rotation
+		#print("this is me: ", global_position)
 		
 	if not pausecamera:
 		if Global.is_on_bike:
@@ -147,12 +161,23 @@ func _physics_process(delta: float) -> void:
 			global_transform.basis.y = Vector3.UP
 			global_transform.basis = global_transform.basis.orthonormalized()
 			global_rotation.y = Global.bike_rotation.y
-			#global_position = Global.bike_position
+			global_position = Global.bike_dismount
 		else:
 			$Collision.disabled = true
 			
 	
 
+func death():
+	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH")
+	Global.is_on_bike = false
+	Global.player_health = 10
+	global_position = respawn_pos
+	velocity = Vector3.ZERO
+	$Collision.disabled = false
+	$CameraRoot.rotation.y = 0
+	rotation.z = 0
+	rotation.x = 0
+	global_transform = respawn_trans
 
 func _on_bullet_timer_timeout() -> void:
 	bullet_avail = true

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0brw4m07fkl4"]
+
+[ext_resource type="PackedScene" uid="uid://dcukupce4cvj" path="res://placeholderassets/ProtoBichaelHandlebars.glb" id="1_fp14g"]
+[ext_resource type="Texture2D" uid="uid://cq1w7uj841sgf" path="res://placeholderassets/ProtoBichaelBody_bichaeltexture.png" id="2_jmwu8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lc633"]
+albedo_texture = ExtResource("2_jmwu8")
+metallic = 0.9
+metallic_specular = 1.0
+roughness = 0.0
+emission = Color(0.675985, 0.460419, 0.333079, 1)
+emission_energy_multiplier = 11.07
+
+[node name="ProtoBichaelHandlebars" instance=ExtResource("1_fp14g")]
+
+[node name="Bichael" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lc633")

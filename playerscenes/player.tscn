@@ -36,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41224, 0)
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309256, 0)
 current = true
+metadata/_edit_lock_ = true
 
 [node name="Arm" type="MeshInstance3D" parent="CameraRoot"]
 transform = Transform3D(0.315005, 0.116463, -1.51175e-09, 0.00427945, -0.115068, -0.294961, -0.0366889, 0.986507, -0.0344046, 0.342615, -0.000628114, -0.508658)
