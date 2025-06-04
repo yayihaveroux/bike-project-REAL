@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="bike demo"
-config/version="0.0.1"
+config/version="0.1.0"
 run/main_scene="res://levelscenes/test_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"

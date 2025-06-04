@@ -131,7 +131,7 @@ offset_bottom = 30.0
 scale = Vector2(0.991418, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "Version: 0.0.1 prototype phase
+text = "Version: 0.1.0 prototype phase
 "
 fit_content = true
 scroll_active = false
