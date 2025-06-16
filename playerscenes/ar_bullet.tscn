@@ -16,18 +16,18 @@ size = Vector3(0.435841, 0.445897, 4.84222)
 [node name="ARBullet" type="Node3D"]
 script = ExtResource("1_xmcr8")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="BulletArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0841571)
 collision_layer = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BulletArea"]
 transform = Transform3D(0.349866, 0, 0, 0, 0.344222, 0, 0, 0, 4.17542, 0, 0, -2.06975)
 material_override = SubResource("StandardMaterial3D_v8ogc")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_v3dxk")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00123566, 8.89301e-05, -2.32162)
 shape = SubResource("BoxShape3D_tapai")
 

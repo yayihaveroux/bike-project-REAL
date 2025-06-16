@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1r54n10djr4f"]
+[gd_scene load_steps=6 format=3 uid="uid://d1r54n10djr4f"]
+
+[ext_resource type="Script" path="res://enemyscenes/shooter_enemy.gd" id="1_3o46e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u4s4v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgkp1"]
-albedo_color = Color(0.842581, 0.0576186, 0, 1)
+albedo_color = Color(0.439838, 0.346934, 0.852984, 1)
+metallic_specular = 1.0
+roughness = 0.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f26m3"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_crej4"]
+radius = 0.676152
+height = 2.33156
+
 [node name="ShooterEnemy" type="CharacterBody3D"]
+script = ExtResource("1_3o46e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_u4s4v")
@@ -15,3 +24,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fgkp1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_f26m3")
+
+[node name="HurtBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CapsuleShape3D_crej4")

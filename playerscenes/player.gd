@@ -38,6 +38,20 @@ func _input(event):
 	
 	
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("BikeEquip(E)"):
+		Global.is_on_bike = not Global.is_on_bike
+		if !Global.is_on_bike:
+			$Collision.disabled = false
+			$CameraRoot.rotation.y = 0
+			rotation.z = 0
+			rotation.x = 0
+			global_transform.basis.y = Vector3.UP
+			global_transform.basis = global_transform.basis.orthonormalized()
+			global_rotation.y = Global.bike_rotation.y
+			global_position = Global.bike_dismount
+		else:
+			$Collision.disabled = true
+		return
 	Global.player_position = global_position
 	if Global.player_health <= 0:
 		death()
@@ -151,19 +165,19 @@ func _physics_process(delta: float) -> void:
 			_:
 				print("what the hell have you done")
 	mouse_motion = Vector2(0,0)
-	if Input.is_action_just_pressed("BikeEquip(E)"):
-		Global.is_on_bike = not Global.is_on_bike
-		if !Global.is_on_bike:
-			$Collision.disabled = false
-			$CameraRoot.rotation.y = 0
-			rotation.z = 0
-			rotation.x = 0
-			global_transform.basis.y = Vector3.UP
-			global_transform.basis = global_transform.basis.orthonormalized()
-			global_rotation.y = Global.bike_rotation.y
-			global_position = Global.bike_dismount
-		else:
-			$Collision.disabled = true
+	#if Input.is_action_just_pressed("BikeEquip(E)"):
+		#Global.is_on_bike = not Global.is_on_bike
+		#if !Global.is_on_bike:
+			#$Collision.disabled = false
+			#$CameraRoot.rotation.y = 0
+			#rotation.z = 0
+			#rotation.x = 0
+			#global_transform.basis.y = Vector3.UP
+			#global_transform.basis = global_transform.basis.orthonormalized()
+			#global_rotation.y = Global.bike_rotation.y
+			#global_position = Global.bike_dismount
+		#else:
+			#$Collision.disabled = true
 			
 	
 

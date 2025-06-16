@@ -9,7 +9,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	$Area3D.position.z -= 5
+	$BulletArea.position.z -= 5
 
 
 func _on_timer_timeout() -> void:

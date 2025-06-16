@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cib7rtg81tbgg"]
+[gd_scene load_steps=11 format=3 uid="uid://cib7rtg81tbgg"]
 
 [ext_resource type="Script" path="res://levelscenes/test_level.gd" id="1_wkv85"]
-[ext_resource type="Texture2D" uid="uid://b8vg3bub8gr02" path="res://placeholderassets/Dark/texture_09.png" id="2_dpxxb"]
 [ext_resource type="PackedScene" uid="uid://d4gxqh2nbgr85" path="res://playerscenes/player.tscn" id="2_uecs2"]
 [ext_resource type="Texture2D" uid="uid://dilbjc35k8wde" path="res://placeholderassets/Red/texture_02.png" id="4_ajbpa"]
 [ext_resource type="PackedScene" uid="uid://cds65r23ft4br" path="res://playerscenes/motorbike.tscn" id="4_h107i"]
+[ext_resource type="Texture2D" uid="uid://c50u6idrrk0tp" path="res://placeholderassets/Dark/texture_02.png" id="4_jxqi2"]
 
 [sub_resource type="Environment" id="Environment_1ubxp"]
 background_mode = 1
@@ -14,23 +14,21 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aew4y"]
+albedo_color = Color(0.243137, 1, 1, 1)
 albedo_texture = ExtResource("4_ajbpa")
 uv1_scale = Vector3(5, 5, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p42xy"]
-albedo_color = Color(0.582813, 0.000259328, 0.586618, 1)
-albedo_texture = ExtResource("2_dpxxb")
-roughness = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mhpqr"]
 size = Vector3(2132.88, 33.9396, 2854.35)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ax1ju"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmb2d"]
+albedo_texture = ExtResource("4_jxqi2")
+
 [node name="test level" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.297981, 0, 0.226585)
 script = ExtResource("1_wkv85")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.358482, 0.933537, 0, -0.933537, 0.358482, 0, 14.6632, 54.288)
 
 [node name="World" type="Node3D" parent="."]
 
@@ -49,42 +47,34 @@ directional_shadow_split_3 = 0.903
 directional_shadow_fade_start = 0.731
 
 [node name="starting platform" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34277, 0, -145.927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.5897, 0, -119.794)
 use_collision = true
-size = Vector3(341.149, 1, 332.439)
+size = Vector3(746.679, 1, 731.353)
 material = SubResource("StandardMaterial3D_aew4y")
-
-[node name="platform" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.62059, -1.03506, 403.644)
-use_collision = true
-size = Vector3(399.308, 2.84576, 723.438)
-material = SubResource("StandardMaterial3D_p42xy")
-
-[node name="obstacle" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 0.772656, -0.634825, 0, 0.634825, 0.772656, -16.6799, 3.39447, 196.574)
-use_collision = true
-size = Vector3(17.8431, 32.4546, 11.1934)
-
-[node name="obstacle4" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3118, 13.7694, 331.334)
-use_collision = true
-size = Vector3(17.8431, 32.4546, 11.1934)
-
-[node name="obstacle2" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1157, 13.7694, 242.021)
-use_collision = true
-size = Vector3(46.4782, 32.4546, 11.1934)
-
-[node name="obstacle3" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83825, 13.7694, 365.629)
-use_collision = true
-size = Vector3(46.4782, 32.4546, 11.1934)
 
 [node name="KillBox" type="Area3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27.9628, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/KillBox"]
 shape = SubResource("BoxShape3D_mhpqr")
+
+[node name="WALL" type="CSGMesh3D" parent="World"]
+transform = Transform3D(11.2216, 0, 0, 0, 159.764, 0, 0, 0, 696.948, -458.838, 80.8012, -135.946)
+use_collision = true
+mesh = SubResource("BoxMesh_ax1ju")
+material = SubResource("StandardMaterial3D_bmb2d")
+
+[node name="WALL2" type="CSGMesh3D" parent="World"]
+transform = Transform3D(11.2216, 0, 0, 0, 159.764, 0, 0, 0, 696.948, 295.512, 80.8012, -135.946)
+use_collision = true
+mesh = SubResource("BoxMesh_ax1ju")
+material = SubResource("StandardMaterial3D_bmb2d")
+
+[node name="WALL3" type="CSGMesh3D" parent="World"]
+transform = Transform3D(-5.1549e-07, 0, 770.357, 0, 159.764, 0, -11.793, 0, -3.36734e-05, -83.2815, 80.8012, -483.603)
+use_collision = true
+mesh = SubResource("BoxMesh_ax1ju")
+material = SubResource("StandardMaterial3D_bmb2d")
 
 [node name="Motorbike" parent="." instance=ExtResource("4_h107i")]
 transform = Transform3D(-0.998446, 0, -0.0557344, 0, 1, 0, 0.0557344, 0, -0.998446, -2.43814, 5.73981, -17.7125)

@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c40tbehaaxs25" path="res://placeholderassets/ProtoBichaelWheel.glb" id="3_cvshe"]
 [ext_resource type="PackedScene" uid="uid://d0brw4m07fkl4" path="res://playerscenes/bichael models/proto_bichael_handlebars.tscn" id="4_qch50"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1psxf"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_qlfer"]
+size = Vector3(1, 3.15118, 1.02832)
 
 [sub_resource type="SphereMesh" id="SphereMesh_y408p"]
 
@@ -21,7 +22,7 @@ floor_snap_length = 0.5
 script = ExtResource("1_krw14")
 
 [node name="Player_dismount" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46318, 0.73267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63536, 1.12238, 0)
 
 [node name="FrontCast" type="RayCast3D" parent="."]
 transform = Transform3D(-4.37114e-08, -0.106908, 0, 1, -4.67311e-09, 0, 0, 0, 1, 3.56064e-09, -1.0952, -1.55626)
@@ -32,8 +33,8 @@ transform = Transform3D(-4.37114e-08, -0.106267, 0, 1, -4.64508e-09, 0, 0, 0, 1,
 target_position = Vector3(-1, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.508734, 0)
-shape = SubResource("SphereShape3D_1psxf")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.443793, 0.00216675)
+shape = SubResource("BoxShape3D_qlfer")
 
 [node name="BikeTurn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.19546)
